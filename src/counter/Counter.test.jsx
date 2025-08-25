@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { describe, it, expect } from 'vitest';
 import Counter from './Counter';
 
 describe('Counter component', () => {
@@ -10,21 +11,18 @@ describe('Counter component', () => {
 
   it('increments the counter', async () => {
     render(<Counter />);
-    const count = screen.getByTestId('count');
-
     await userEvent.click(screen.getByText('Increment'));
-    expect(count).toHaveTextContent('1');
+    expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
 
   it('decrements the counter', async () => {
     render(<Counter />);
     const count = screen.getByTestId('count');
-
     await userEvent.click(screen.getByText('Decrement'));
     expect(count).toHaveTextContent('-1');
   });
 
-  it('resets the counter to 0', async () => {
+  it('reset to zero', async () => {
     render(<Counter />);
     const count = screen.getByTestId('count');
     await userEvent.click(screen.getByText('Reset'));
